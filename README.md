@@ -1,28 +1,37 @@
-# Plantilla_metodos
+# Procesos Estocásticos
 
+Repositorio documentado para la materia de Procesos Estocásticos.
 
-Plantilla para proyecto de metodos numericos II
+Este repositorio fue creado a partir de la plantilla proporcionada por el profesor. Su objetivo es organizar materiales, códigos y simulaciones relacionados con los temas vistos durante el semestre.
 
-Contiene algunos metodos programados con graficación incluida solo falta completar los faltantes(BFGS, Integracion, Derivacion), tambien puedes agregar tus propios metodo o modificar cualquier parte del codigo.
+## Contenido del repositorio
 
-## Graficacion con plotly 
+- `páginas/`: carpeta incluida en la plantilla original.
+- `Main.py`: archivo principal del proyecto.
+- `requisitos.txt`: archivo con las librerías necesarias para ejecutar el proyecto.
+- `Im1.png`: imagen utilizada dentro de la plantilla.
+- `LICENCIA`: licencia del repositorio.
+- `LÉAME.md`: documentación general del repositorio.
 
-Para graficar una funcion crea una lista con los valores de $x,y$ y $z$ segun sea el caso crea un objeto con 
+## Objetivo
 
-plo = gro.Figure()
+El objetivo de este repositorio es presentar de forma ordenada los materiales y trabajos desarrollados durante el semestre, incluyendo simulaciones computacionales relacionadas con procesos estocásticos.
 
-posteriormente añade un trazo con 
+## Temas relacionados
 
-plo.add_trace(gro.Scatter(x=valores de x,y=valores de y))
+- Caminatas aleatorias.
+- Cadenas de Markov.
+- Procesos de Poisson.
+- Movimiento browniano.
+- Simulación de trayectorias aleatorias.
+- Análisis gráfico de procesos estocásticos.
 
+## Uso del repositorio
 
-usa gro.Scatter para graficar figuras en 2 dimensiones. Para graficar figuras en 3 dimensiones crea un array con las coordenadas de x,y,z 
+Para ejecutar los archivos de Python, se recomienda instalar previamente las librerías necesarias con:
 
-coordenadas = $[[x_1,y_1,z_1],---,[x_n,y_n,z_n]]$
-
-y añadade un trazo a la figura plo con la funcion gro.Surface
-
- plo.add_trace(gro.Surface(z=coordenadas))
+```bash
+pip install -r requisitos.txt
 
 
 
