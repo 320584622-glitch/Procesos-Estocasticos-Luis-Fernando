@@ -1,0 +1,27 @@
+Proyectos_Procesos_Estocasticos/
+│
+├── 01_Markov_Discreto_Continuo/
+│   ├── markov_discreto_continuo.tex
+│   └── README.md
+│
+├── 02_Ejercicios_Procesos_Estocasticos/
+│   ├── ejercicios_procesos_estocasticos_60.tex
+│   └── README.md
+│
+├── 03_Markov_Aplicado_Serpientes_Mono_Infinito/
+│   ├── markov_serpientes_mono_infinito.tex
+│   └── README.md
+│
+├── 04_Plantillas_Ejercicios_Basicos/
+│   ├── plantilla_markov_poisson_browniano.tex
+│   └── README.md
+│
+├── 05_Historia_Probabilidad_Yuval_Peres/
+│   ├── historia_probabilidad_yuval_peres.pdf
+│   ├── historia_probabilidad_yuval_peres.tex
+│   └── README.md
+│
+└── 06_Axiomas_Geometria_Conformal_Yuval_Peres/
+    ├── axiomas_geometria_conformal_yuval_peres.pdf
+    ├── axiomas_geometria_conformal_yuval_peres.tex
+    └── README.md
