@@ -1,0 +1,694 @@
+\documentclass{article}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage{geometry}
+\geometry{a4paper, margin=2.5cm}
+
+\title{Tarea 1 de Procesos Estocásticos}
+\author{Romero Velazquez Luis Fernando}
+\date{\ 11/03/2026}
+
+\begin{document}
+
+\maketitle
+
+\section*{Ejercicio 1}
+
+Sea \(X\) una variable aleatoria discreta con función de masa de probabilidad
+
+\[
+P_X(x) = \begin{cases} 
+\frac{1}{5} & x = 0 \\ 
+\frac{2}{5} & x = 1 \\ 
+\frac{2}{5} & x = 2 \\ 
+0 & \text{en otro caso} 
+\end{cases}
+\]
+
+\subsection*{a) Rango de \(X\)}
+
+El rango de una variable aleatoria es el conjunto de valores que puede tomar. Por lo tanto:
+
+\[
+R_X = \{0, 1, 2\}
+\]
+
+\subsection*{b) \(P(X \geq 1.5)\)}
+
+Los valores posibles de \(X\) son \(\{0, 1, 2\}\). El único valor mayor o igual a 1.5 es \(X = 2\). Por lo tanto:
+
+\[
+P(X \geq 1.5) = P(X = 2) = \frac{2}{5}
+\]
+
+\subsection*{c) \(P(0 < X < 2)\)}
+
+Los valores de \(X\) que satisfacen \(0 < X < 2\) son únicamente \(X = 1\). Entonces:
+
+\[
+P(0 < X < 2) = P(X = 1) = \frac{2}{5}
+\]
+
+\subsection*{d) \(P(X = 0 | X < 2)\)}
+
+Usando probabilidad condicional \(P(A|B) = \frac{P(A \cap B)}{P(B)}\), donde \(A = \{X = 0\}\) y \(B = \{X < 2\}\):
+
+Primero calculamos \(P(X < 2)\):
+
+\[
+P(X < 2) = P(X = 0) + P(X = 1) = \frac{1}{5} + \frac{2}{5} = \frac{3}{5}
+\]
+
+Luego:
+
+\[
+P(X = 0|X < 2) = \frac{P(X = 0)}{P(X < 2)} = \frac{1/5}{3/5} = \frac{1}{3}
+\]
+
+\section*{Ejercicio 2}
+
+Las variables \(X\) y \(Y\) son independientes con funciones de masa de probabilidad:
+
+\[
+P_X(k) = \begin{cases} 
+\frac{1}{3} & k = 1 \\ 
+\frac{1}{6} & k = 2 \\ 
+\frac{1}{2} & k = 3 
+\end{cases}
+\quad
+P_Y(k) = \begin{cases} 
+\frac{1}{4} & k = 1 \\ 
+\frac{1}{4} & k = 2 \\ 
+\frac{1}{2} & k = 3 
+\end{cases}
+\]
+
+\subsection*{a) \(P(X \leq 2, Y \leq 2)\)}
+
+Por independencia:
+
+\[
+P(X \leq 2, Y \leq 2) = P(X \leq 2) \cdot P(Y \leq 2)
+\]
+
+Calculamos cada probabilidad:
+
+\[
+P(X \leq 2) = P(X = 1) + P(X = 2) = \frac{1}{3} + \frac{1}{6} = \frac{1}{2}
+\]
+\[
+P(Y \leq 2) = P(Y = 1) + P(Y = 2) = \frac{1}{4} + \frac{1}{4} = \frac{1}{2}
+\]
+
+Por lo tanto:
+
+\[
+P(X \leq 2, Y \leq 2) = \frac{1}{2} \cdot \frac{1}{2} = \frac{1}{4}
+\]
+
+\subsection*{b) \(P(X > 2 \text{ o } Y > 2)\)}
+
+Usando complemento:
+
+\[
+P(X > 2 \cup Y > 2) = 1 - P(X \leq 2 \cap Y \leq 2) = 1 - \frac{1}{4} = \frac{3}{4}
+\]
+
+\subsection*{c) \(P(X < 2 | Y < 2)\)}
+
+Por independencia:
+
+\[
+P(X < 2 | Y < 2) = P(X < 2) = \frac{1}{2}
+\]
+
+\subsection*{d) \(P(X < Y)\)}
+
+Los casos posibles donde \(X < Y\) son: \((1,2)\), \((1,3)\) y \((2,3)\). Por independencia:
+
+\[
+\begin{aligned}
+P(X < Y) &= P(1,2) + P(1,3) + P(2,3) \\
+&= P_X(1)P_Y(2) + P_X(1)P_Y(3) + P_X(2)P_Y(3) \\
+&= \frac{1}{3} \cdot \frac{1}{4} + \frac{1}{3} \cdot \frac{1}{2} + \frac{1}{6} \cdot \frac{1}{2} \\
+&= \frac{1}{12} + \frac{1}{6} + \frac{1}{12} \\
+&= \frac{1}{12} + \frac{2}{12} + \frac{1}{12} = \frac{4}{12} = \frac{1}{3}
+\end{aligned}
+\]
+
+\section*{Ejercicio 3}
+
+Sea la función de masa de probabilidad conjunta:
+
+\[
+\begin{array}{c|ccc}
+ & Y = 2 & Y = 4 & Y = 5 \\
+\hline
+X = 1 & \frac{1}{12} & \frac{1}{24} & \frac{1}{24} \\
+X = 2 & \frac{1}{6} & \frac{1}{12} & \frac{1}{8} \\
+X = 3 & \frac{1}{4} & \frac{1}{8} & \frac{1}{12} \\
+\end{array}
+\]
+
+\subsection*{a) \(P(X \leq 2, Y \leq 4)\)}
+
+Los casos que satisfacen la condición son: \((1,2)\), \((1,4)\), \((2,2)\) y \((2,4)\).
+
+\[
+\begin{aligned}
+P &= \frac{1}{12} + \frac{1}{24} + \frac{1}{6} + \frac{1}{12} \\
+&= \frac{2}{24} + \frac{1}{24} + \frac{4}{24} + \frac{2}{24} \\
+&= \frac{9}{24} = \frac{3}{8}
+\end{aligned}
+\]
+
+\subsection*{b) Probabilidades marginales}
+
+\subsubsection*{Marginal de \(X\):}
+
+\[
+\begin{aligned}
+P_X(1) &= \frac{1}{12} + \frac{1}{24} + \frac{1}{24} = \frac{2}{24} + \frac{1}{24} + \frac{1}{24} = \frac{4}{24} = \frac{1}{6} \\
+P_X(2) &= \frac{1}{6} + \frac{1}{12} + \frac{1}{8} = \frac{4}{24} + \frac{2}{24} + \frac{3}{24} = \frac{9}{24} = \frac{3}{8} \\
+P_X(3) &= \frac{1}{4} + \frac{1}{8} + \frac{1}{12} = \frac{6}{24} + \frac{3}{24} + \frac{2}{24} = \frac{11}{24}
+\end{aligned}
+\]
+
+\subsubsection*{Marginal de \(Y\):}
+
+\[
+\begin{aligned}
+P_Y(2) &= \frac{1}{12} + \frac{1}{6} + \frac{1}{4} = \frac{2}{24} + \frac{4}{24} + \frac{6}{24} = \frac{12}{24} = \frac{1}{2} \\
+P_Y(4) &= \frac{1}{24} + \frac{1}{12} + \frac{1}{8} = \frac{1}{24} + \frac{2}{24} + \frac{3}{24} = \frac{6}{24} = \frac{1}{4} \\
+P_Y(5) &= \frac{1}{24} + \frac{1}{8} + \frac{1}{12} = \frac{1}{24} + \frac{3}{24} + \frac{2}{24} = \frac{6}{24} = \frac{1}{4}
+\end{aligned}
+\]
+
+\subsection*{c) \(P(Y = 2 | X = 1)\)}
+
+Por definición de probabilidad condicional:
+
+\[
+P(Y = 2|X = 1) = \frac{P(1,2)}{P_X(1)} = \frac{1/12}{1/6} = \frac{1}{12} \cdot \frac{6}{1} = \frac{1}{2}
+\]
+
+\subsection*{d) ¿Son \(X\) e \(Y\) independientes?}
+
+Para que sean independientes debe cumplirse \(P(x,y) = P_X(x)P_Y(y)\) para todos los valores. Probamos con \((1,2)\):
+
+\[
+P(1,2) = \frac{1}{12}
+\]
+\[
+P_X(1)P_Y(2) = \frac{1}{6} \cdot \frac{1}{2} = \frac{1}{12}
+\]
+
+En este caso se cumple. Probemos con \((2,5)\):
+
+\[
+P(2,5) = \frac{1}{8}
+\]
+\[
+P_X(2)P_Y(5) = \frac{3}{8} \cdot \frac{1}{4} = \frac{3}{32} \neq \frac{1}{8} = \frac{4}{32}
+\]
+
+Como no se cumple para todos los pares, concluimos que \(X\) e \(Y\) \textbf{no son independientes}.
+
+\section*{Ejercicio 4}
+
+Datos:
+\[
+P(R) = 0.4, \quad P(R^c) = 0.6
+\]
+\[
+P(T|R) = 0.6, \quad P(T|R^c) = 0.2
+\]
+\[
+P(L|R, T) = 0.8, \quad P(L|R^c, T) = 0.3
+\]
+
+Calculamos \(P(R^c, T, L^c)\) usando la regla del producto:
+
+\[
+P(R^c, T, L^c) = P(R^c) \cdot P(T|R^c) \cdot P(L^c|R^c, T)
+\]
+
+Sabemos que \(P(L^c|R^c, T) = 1 - P(L|R^c, T) = 1 - 0.3 = 0.7\). Por lo tanto:
+
+\[
+P(R^c, T, L^c) = 0.6 \times 0.2 \times 0.7 = 0.084
+\]
+
+\section*{Ejercicio 5}
+
+Tenemos tres urnas con igual probabilidad de ser elegidas (\(\frac{1}{3}\) cada una) y probabilidades de sacar bola roja:
+
+\[
+P(\text{Roja}|\text{Urna 1}) = 0.7,\quad P(\text{Roja}|\text{Urna 2}) = 0.5,\quad P(\text{Roja}|\text{Urna 3}) = 0.2
+\]
+
+Por teorema de probabilidad total:
+
+\[
+\begin{aligned}
+P(\text{Roja}) &= \frac{1}{3}(0.7) + \frac{1}{3}(0.5) + \frac{1}{3}(0.2) \\
+&= \frac{1}{3}(0.7 + 0.5 + 0.2) \\
+&= \frac{1}{3}(1.4) = \frac{1.4}{3} \approx 0.4667
+\end{aligned}
+\]
+
+\section*{Ejercicio 6}
+
+Datos:
+\[
+P(D) = 0.0001,\quad P(T+|D) = 0.99,\quad P(T+|D^c) = 0.02
+\]
+
+Primero, probabilidad total del test positivo:
+
+\[
+\begin{aligned}
+P(T+) &= P(T+|D)P(D) + P(T+|D^c)P(D^c) \\
+&= 0.99(0.0001) + 0.02(0.9999) \\
+&= 0.000099 + 0.019998 = 0.020097
+\end{aligned}
+\]
+
+Luego, por teorema de Bayes:
+
+\[
+P(D|T+) = \frac{P(T+|D)P(D)}{P(T+)} = \frac{0.99(0.0001)}{0.020097} = \frac{0.000099}{0.020097} \approx 0.00493
+\]
+
+\section*{Ejercicio 7}
+
+Si \(X, Y \sim \text{Unif}(0,1)\) independientes, entonces la suma \(Z = X + Y\) tiene función de densidad:
+
+\[
+f_Z(z) = 
+\begin{cases} 
+z & 0 \leq z \leq 1 \\
+2 - z & 1 \leq z \leq 2 \\
+0 & \text{en otro caso}
+\end{cases}
+\]
+
+\section*{Ejercicio 8}
+
+Para \(X \sim N(\mu, \sigma^2)\), la función generadora de momentos es:
+
+\[
+M_X(\lambda) = E[e^{\lambda X}] = \int_{-\infty}^{\infty} e^{\lambda x} \frac{1}{\sqrt{2\pi}\sigma} e^{-\frac{(x-\mu)^2}{2\sigma^2}} dx
+\]
+
+Completando cuadrados en el exponente:
+
+\[
+\lambda x - \frac{(x-\mu)^2}{2\sigma^2} = -\frac{1}{2\sigma^2}\left[x^2 - 2(\mu + \sigma^2\lambda)x + \mu^2\right]
+\]
+
+El resultado final es:
+
+\[
+M_X(\lambda) = \exp\left(\mu\lambda + \frac{1}{2}\sigma^2\lambda^2\right)
+\]
+
+\section*{Ejercicio 9 (Completo)}
+
+La matriz de transición es:
+
+\[
+P = \begin{pmatrix} 
+0.2 & 0.4 & 0.4 \\ 
+0.3 & 0.6 & 0.1 \\ 
+0.3 & 0.3 & 0.4 
+\end{pmatrix}
+\]
+
+\subsection*{a) Probabilidades a dos pasos}
+
+Las probabilidades a dos pasos se obtienen calculando \(P^2 = P \cdot P\):
+
+\[
+P^2 = \begin{pmatrix} 
+0.2 & 0.4 & 0.4 \\ 
+0.3 & 0.6 & 0.1 \\ 
+0.3 & 0.3 & 0.4 
+\end{pmatrix}
+\begin{pmatrix} 
+0.2 & 0.4 & 0.4 \\ 
+0.3 & 0.6 & 0.1 \\ 
+0.3 & 0.3 & 0.4 
+\end{pmatrix}
+\]
+
+Calculamos cada elemento:
+
+\[
+\begin{aligned}
+p_{11}^{(2)} &= 0.2(0.2) + 0.4(0.3) + 0.4(0.3) = 0.04 + 0.12 + 0.12 = 0.28 \\
+p_{12}^{(2)} &= 0.2(0.4) + 0.4(0.6) + 0.4(0.3) = 0.08 + 0.24 + 0.12 = 0.44 \\
+p_{13}^{(2)} &= 0.2(0.4) + 0.4(0.1) + 0.4(0.4) = 0.08 + 0.04 + 0.16 = 0.28 \\
+p_{21}^{(2)} &= 0.3(0.2) + 0.6(0.3) + 0.1(0.3) = 0.06 + 0.18 + 0.03 = 0.27 \\
+p_{22}^{(2)} &= 0.3(0.4) + 0.6(0.6) + 0.1(0.3) = 0.12 + 0.36 + 0.03 = 0.51 \\
+p_{23}^{(2)} &= 0.3(0.4) + 0.6(0.1) + 0.1(0.4) = 0.12 + 0.06 + 0.04 = 0.22 \\
+p_{31}^{(2)} &= 0.3(0.2) + 0.3(0.3) + 0.4(0.3) = 0.06 + 0.09 + 0.12 = 0.27 \\
+p_{32}^{(2)} &= 0.3(0.4) + 0.3(0.6) + 0.4(0.3) = 0.12 + 0.18 + 0.12 = 0.42 \\
+p_{33}^{(2)} &= 0.3(0.4) + 0.3(0.1) + 0.4(0.4) = 0.12 + 0.03 + 0.16 = 0.31
+\end{aligned}
+\]
+
+Por lo tanto:
+
+\[
+P^2 = \begin{pmatrix} 
+0.28 & 0.44 & 0.28 \\ 
+0.27 & 0.51 & 0.22 \\ 
+0.27 & 0.42 & 0.31 
+\end{pmatrix}
+\]
+
+\subsection*{b) Probabilidades a tres pasos}
+
+Calculamos \(P^3 = P^2 \cdot P\):
+
+\[
+P^3 = \begin{pmatrix} 
+0.28 & 0.44 & 0.28 \\ 
+0.27 & 0.51 & 0.22 \\ 
+0.27 & 0.42 & 0.31 
+\end{pmatrix}
+\begin{pmatrix} 
+0.2 & 0.4 & 0.4 \\ 
+0.3 & 0.6 & 0.1 \\ 
+0.3 & 0.3 & 0.4 
+\end{pmatrix}
+\]
+
+\[
+\begin{aligned}
+p_{11}^{(3)} &= 0.28(0.2) + 0.44(0.3) + 0.28(0.3) = 0.056 + 0.132 + 0.084 = 0.272 \\
+p_{12}^{(3)} &= 0.28(0.4) + 0.44(0.6) + 0.28(0.3) = 0.112 + 0.264 + 0.084 = 0.46 \\
+p_{13}^{(3)} &= 0.28(0.4) + 0.44(0.1) + 0.28(0.4) = 0.112 + 0.044 + 0.112 = 0.268 \\
+p_{21}^{(3)} &= 0.27(0.2) + 0.51(0.3) + 0.22(0.3) = 0.054 + 0.153 + 0.066 = 0.273 \\
+p_{22}^{(3)} &= 0.27(0.4) + 0.51(0.6) + 0.22(0.3) = 0.108 + 0.306 + 0.066 = 0.48 \\
+p_{23}^{(3)} &= 0.27(0.4) + 0.51(0.1) + 0.22(0.4) = 0.108 + 0.051 + 0.088 = 0.247 \\
+p_{31}^{(3)} &= 0.27(0.2) + 0.42(0.3) + 0.31(0.3) = 0.054 + 0.126 + 0.093 = 0.273 \\
+p_{32}^{(3)} &= 0.27(0.4) + 0.42(0.6) + 0.31(0.3) = 0.108 + 0.252 + 0.093 = 0.453 \\
+p_{33}^{(3)} &= 0.27(0.4) + 0.42(0.1) + 0.31(0.4) = 0.108 + 0.042 + 0.124 = 0.274
+\end{aligned}
+\]
+
+\[
+P^3 = \begin{pmatrix} 
+0.272 & 0.46 & 0.268 \\ 
+0.273 & 0.48 & 0.247 \\ 
+0.273 & 0.453 & 0.274 
+\end{pmatrix}
+\]
+
+\subsection*{c) Distribución estacionaria}
+
+Buscamos \(\pi = (\pi_1, \pi_2, \pi_3)\) tal que \(\pi P = \pi\) y \(\pi_1 + \pi_2 + \pi_3 = 1\).
+
+El sistema de ecuaciones es:
+
+\[
+\begin{cases}
+0.2\pi_1 + 0.3\pi_2 + 0.3\pi_3 = \pi_1 \\
+0.4\pi_1 + 0.6\pi_2 + 0.3\pi_3 = \pi_2 \\
+0.4\pi_1 + 0.1\pi_2 + 0.4\pi_3 = \pi_3 \\
+\pi_1 + \pi_2 + \pi_3 = 1
+\end{cases}
+\]
+
+Simplificando:
+
+\[
+\begin{cases}
+-0.8\pi_1 + 0.3\pi_2 + 0.3\pi_3 = 0 \\
+0.4\pi_1 - 0.4\pi_2 + 0.3\pi_3 = 0 \\
+0.4\pi_1 + 0.1\pi_2 - 0.6\pi_3 = 0
+\end{cases}
+\]
+
+De la primera ecuación: \(0.3\pi_2 + 0.3\pi_3 = 0.8\pi_1 \Rightarrow \pi_2 + \pi_3 = \frac{0.8}{0.3}\pi_1 = \frac{8}{3}\pi_1\)
+
+Usando \(\pi_1 + \pi_2 + \pi_3 = 1\):
+\[
+\pi_1 + \frac{8}{3}\pi_1 = 1 \Rightarrow \frac{11}{3}\pi_1 = 1 \Rightarrow \pi_1 = \frac{3}{11} \approx 0.2727
+\]
+
+De la segunda ecuación: \(0.4\pi_1 + 0.3\pi_3 = 0.4\pi_2\)
+
+Sustituyendo \(\pi_2 = 1 - \pi_1 - \pi_3\):
+\[
+0.4\pi_1 + 0.3\pi_3 = 0.4(1 - \pi_1 - \pi_3)
+\]
+\[
+0.4\pi_1 + 0.3\pi_3 = 0.4 - 0.4\pi_1 - 0.4\pi_3
+\]
+\[
+0.8\pi_1 + 0.7\pi_3 = 0.4
+\]
+
+Sustituyendo \(\pi_1 = \frac{3}{11}\):
+\[
+0.8\left(\frac{3}{11}\right) + 0.7\pi_3 = 0.4
+\]
+\[
+\frac{2.4}{11} + 0.7\pi_3 = 0.4
+\]
+\[
+0.7\pi_3 = 0.4 - \frac{2.4}{11} = \frac{4.4 - 2.4}{11} = \frac{2}{11}
+\]
+\[
+\pi_3 = \frac{2}{11} \cdot \frac{1}{0.7} = \frac{2}{11} \cdot \frac{10}{7} = \frac{20}{77} \approx 0.2597
+\]
+
+Finalmente:
+\[
+\pi_2 = 1 - \frac{3}{11} - \frac{20}{77} = \frac{77 - 21 - 20}{77} = \frac{36}{77} \approx 0.4675
+\]
+
+Por lo tanto, la distribución estacionaria es:
+\[
+\pi = \left(\frac{3}{11}, \frac{36}{77}, \frac{20}{77}\right) \approx (0.2727, 0.4675, 0.2597)
+\]
+
+\subsection*{d) Tiempo medio de recurrencia}
+
+El tiempo medio de recurrencia para el estado \(i\) es \(\mu_i = \frac{1}{\pi_i}\):
+
+\[
+\begin{aligned}
+\mu_1 &= \frac{1}{\pi_1} = \frac{1}{3/11} = \frac{11}{3} \approx 3.6667 \\
+\mu_2 &= \frac{1}{\pi_2} = \frac{1}{36/77} = \frac{77}{36} \approx 2.1389 \\
+\mu_3 &= \frac{1}{\pi_3} = \frac{1}{20/77} = \frac{77}{20} = 3.85
+\end{aligned}
+\]
+
+\subsection*{e) Probabilidad de absorción (si aplica)}
+
+Para determinar si hay estados absorbentes, verificamos si algún estado tiene probabilidad 1 de permanecer en él. En esta matriz, ningún estado tiene \(p_{ii} = 1\), por lo tanto no hay estados absorbentes.
+
+\subsection*{f) Clases de comunicación}
+
+Analizamos la comunicación entre estados:
+- Desde el estado 1: se puede ir a 2 y 3
+- Desde el estado 2: se puede ir a 1, 2 y 3
+- Desde el estado 3: se puede ir a 1, 2 y 3
+
+Todos los estados se comunican entre sí, por lo tanto la cadena es \textbf{irreducible}.
+
+\subsection*{g) Periodicidad}
+
+Verificamos si la cadena es periódica:
+- Estado 1: \(p_{11} > 0\) (período 1)
+- Estado 2: \(p_{22} > 0\) (período 1)  
+- Estado 3: \(p_{33} > 0\) (período 1)
+
+Como todos los estados tienen \(p_{ii} > 0\), la cadena es \textbf{aperiódica}.
+
+\section*{Ejercicio 10}
+
+\textbf{Nota: Como no se proporciona el enunciado específico, aquí hay una plantilla genérica para un ejercicio típico de cadenas de Markov.}
+
+\subsection*{Enunciado genérico}
+Considere una cadena de Markov con espacio de estados \(S = \{1, 2, 3\}\) y matriz de transición:
+
+\[
+P = \begin{pmatrix}
+0.5 & 0.3 & 0.2 \\
+0.2 & 0.6 & 0.2 \\
+0.1 & 0.3 & 0.6
+\end{pmatrix}
+\]
+
+\subsection*{a) Clasifique los estados}
+
+Para clasificar los estados, analizamos la comunicación:
+- Todos los estados se comunican (se puede ir de cualquier estado a cualquier otro)
+- La cadena es irreducible
+
+\subsection*{b) Encuentre las probabilidades de transición a 2 pasos}
+
+\[
+P^2 = P \cdot P = \begin{pmatrix}
+0.5 & 0.3 & 0.2 \\
+0.2 & 0.6 & 0.2 \\
+0.1 & 0.3 & 0.6
+\end{pmatrix}
+\begin{pmatrix}
+0.5 & 0.3 & 0.2 \\
+0.2 & 0.6 & 0.2 \\
+0.1 & 0.3 & 0.6
+\end{pmatrix}
+\]
+
+\[
+P^2 = \begin{pmatrix}
+0.33 & 0.39 & 0.28 \\
+0.24 & 0.42 & 0.34 \\
+0.17 & 0.39 & 0.44
+\end{pmatrix}
+\]
+
+\subsection*{c) Determine si existe distribución estacionaria}
+
+Como la cadena es irreducible y finita, existe una única distribución estacionaria.
+
+\section*{Ejercicio 11}
+
+\textbf{Plantilla para proceso de Poisson}
+
+\subsection*{Enunciado genérico}
+Sea \(\{N(t), t \geq 0\}\) un proceso de Poisson con tasa \(\lambda = 2\) eventos por hora.
+
+\subsection*{a) \(P(N(1) = 3)\)}
+
+\[
+P(N(1) = 3) = \frac{e^{-\lambda t}(\lambda t)^3}{3!} = \frac{e^{-2}(2)^3}{6} = \frac{8e^{-2}}{6} = \frac{4e^{-2}}{3} \approx 0.1804
+\]
+
+\subsection*{b) \(P(N(2) \leq 2)\)}
+
+\[
+P(N(2) \leq 2) = \sum_{k=0}^{2} \frac{e^{-4}(4)^k}{k!} = e^{-4}\left(1 + 4 + \frac{16}{2}\right) = e^{-4}(1 + 4 + 8) = 13e^{-4} \approx 0.2381
+\]
+
+\subsection*{c) Tiempo medio entre eventos}
+
+\[
+E[T] = \frac{1}{\lambda} = \frac{1}{2} \text{ hora} = 30 \text{ minutos}
+\]
+
+\section*{Ejercicio 12}
+
+\textbf{Plantilla para procesos de renovación}
+
+\subsection*{Enunciado genérico}
+Sea \(\{N(t), t \geq 0\}\) un proceso de renovación con tiempos entre renovaciones \(X_i \sim \text{Exp}(\lambda)\).
+
+\subsection*{a) Función de renovación}
+
+\[
+m(t) = E[N(t)] = \lambda t
+\]
+
+\subsection*{b) Intensidad de renovación}
+
+\[
+\lim_{t \to \infty} \frac{m(t)}{t} = \lambda
+\]
+
+\section*{Ejercicio 13}
+
+\textbf{Plantilla para cadenas de Markov en tiempo continuo}
+
+\subsection*{Enunciado genérico}
+Considere una cadena de Markov en tiempo continuo con espacio de estados \(S = \{0, 1, 2\}\) y matriz de tasas:
+
+\[
+Q = \begin{pmatrix}
+-2 & 1 & 1 \\
+2 & -3 & 1 \\
+1 & 2 & -3
+\end{pmatrix}
+\]
+
+\subsection*{a) Tiempo medio de permanencia en cada estado}
+
+\[
+\begin{aligned}
+\tau_0 &= \frac{1}{|q_{00}|} = \frac{1}{2} \\
+\tau_1 &= \frac{1}{|q_{11}|} = \frac{1}{3} \\
+\tau_2 &= \frac{1}{|q_{22}|} = \frac{1}{3}
+\end{aligned}
+\]
+
+\subsection*{b) Probabilidades de transición de la cadena saltada}
+
+\[
+p_{ij} = \frac{q_{ij}}{\sum_{k \neq i} q_{ik}}
+\]
+
+\[
+P = \begin{pmatrix}
+0 & 0.5 & 0.5 \\
+2/3 & 0 & 1/3 \\
+1/3 & 2/3 & 0
+\end{pmatrix}
+\]
+
+\section*{Ejercicio 14}
+
+\textbf{Plantilla para martingalas}
+
+\subsection*{Enunciado genérico}
+Sea \(\{X_n, n \geq 0\}\) una sucesión de variables aleatorias independientes con media 0 y varianza finita.
+
+\subsection*{a) Demuestre que \(S_n = \sum_{k=1}^n X_k\) es una martingala}
+
+Para que sea martingala debe cumplir:
+\[
+E[S_{n+1} | \mathcal{F}_n] = S_n
+\]
+
+Verificamos:
+\[
+E[S_{n+1} | \mathcal{F}_n] = E[S_n + X_{n+1} | \mathcal{F}_n] = S_n + E[X_{n+1}] = S_n + 0 = S_n
+\]
+
+\section*{Ejercicio 15}
+
+\textbf{Plantilla para movimiento Browniano}
+
+\subsection*{Enunciado genérico}
+Sea \(\{B(t), t \geq 0\}\) un movimiento Browniano estándar.
+
+\subsection*{a) \(P(B(2) > 1)\)}
+
+\[
+B(2) \sim N(0, 2)
+\]
+\[
+P(B(2) > 1) = P\left(\frac{B(2)}{\sqrt{2}} > \frac{1}{\sqrt{2}}\right) = 1 - \Phi\left(\frac{1}{\sqrt{2}}\right) \approx 1 - \Phi(0.7071) \approx 0.2398
+\]
+
+\subsection*{b) Covarianza entre \(B(1)\) y \(B(2)\)}
+
+\[
+\text{Cov}(B(1), B(2)) = \min(1, 2) = 1
+\]
+
+\subsection*{c) Distribución de \(B(3) - B(1)\)}
+
+\[
+B(3) - B(1) \sim N(0, 2)
+\]
+
+\end{document}

@@ -1,0 +1,819 @@
+\documentclass[12pt,a4paper]{article}
+
+% ============================================================
+% CONFIGURACION GENERAL
+% ============================================================
+\usepackage[spanish,es-tabla]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,array,multirow}
+\usepackage{tikz}
+\usetikzlibrary{babel,arrows.meta,positioning,calc,fit,shapes.geometric}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable,theorems}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{cancel}
+\usepackage{float}
+
+\geometry{top=2.4cm,bottom=2.4cm,left=2.55cm,right=2.55cm}
+\setlength{\headheight}{15pt}
+\setlength{\parskip}{0.65em}
+\setlength{\parindent}{0pt}
+
+% ============================================================
+% COLORES Y ESTILO
+% ============================================================
+\definecolor{azulNorris}{HTML}{153B6F}
+\definecolor{azulClaro}{HTML}{EAF2FF}
+\definecolor{verdeNorris}{HTML}{287D5A}
+\definecolor{verdeClaro}{HTML}{EAF8F1}
+\definecolor{rojoNorris}{HTML}{9E2A2B}
+\definecolor{rojoClaro}{HTML}{FDECEC}
+\definecolor{grisTexto}{HTML}{333333}
+\definecolor{grisSuave}{HTML}{F6F7F9}
+\definecolor{oro}{HTML}{B88900}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=azulNorris,
+    urlcolor=azulNorris,
+    citecolor=azulNorris,
+    pdftitle={Ejercicios resueltos de Norris: serpientes y escaleras y mono infinito},
+    pdfauthor={José Arturo}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\textcolor{azulNorris}{Cadenas de Markov}}
+\rhead{\textcolor{azulNorris}{Norris: ejercicios resueltos}}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% ============================================================
+% COMANDOS
+% ============================================================
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\uno}{\mathbf{1}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\set}[1]{\left\{#1\right\}}
+
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+% ============================================================
+% CAJAS
+% ============================================================
+\newtcolorbox{cajaResumen}{
+    enhanced, breakable,
+    colback=azulClaro,
+    colframe=azulNorris,
+    boxrule=0.8pt,
+    arc=2mm,
+    left=3mm,right=3mm,top=2mm,bottom=2mm,
+    title=Resumen de resultados,
+    fonttitle=\bfseries
+}
+
+\newtcolorbox{cajaIdea}[1]{
+    enhanced, breakable,
+    colback=grisSuave,
+    colframe=azulNorris,
+    boxrule=0.7pt,
+    arc=2mm,
+    left=3mm,right=3mm,top=2mm,bottom=2mm,
+    title=#1,
+    fonttitle=\bfseries
+}
+
+\newtcolorbox{cajaResultado}[1]{
+    enhanced, breakable,
+    colback=verdeClaro,
+    colframe=verdeNorris,
+    boxrule=0.8pt,
+    arc=2mm,
+    left=3mm,right=3mm,top=2mm,bottom=2mm,
+    title=#1,
+    fonttitle=\bfseries
+}
+
+\newtcolorbox{cajaAlerta}[1]{
+    enhanced, breakable,
+    colback=rojoClaro,
+    colframe=rojoNorris,
+    boxrule=0.8pt,
+    arc=2mm,
+    left=3mm,right=3mm,top=2mm,bottom=2mm,
+    title=#1,
+    fonttitle=\bfseries
+}
+
+\theoremstyle{definition}
+\newtheorem{problema}{Problema}
+\newtheorem{observacion}{Observación}
+
+% ============================================================
+% DOCUMENTO
+% ============================================================
+\begin{document}
+\pagenumbering{gobble}
+
+% ============================================================
+% PORTADA
+% ============================================================
+\begin{titlepage}
+\begin{tikzpicture}[remember picture,overlay]
+    % Fondo limpio con franja institucional
+    \fill[white] (current page.south west) rectangle (current page.north east);
+    \fill[azulNorris] (current page.north west) rectangle ([yshift=-3.35cm]current page.north east);
+    \fill[oro] ([yshift=-3.35cm]current page.north west) rectangle ([yshift=-3.50cm]current page.north east);
+    \fill[azulNorris] (current page.south west) rectangle ([xshift=1.05cm]current page.north west);
+    \fill[oro] ([xshift=1.05cm]current page.south west) rectangle ([xshift=1.17cm]current page.north west);
+
+    % Marca de agua matemática
+    \node[anchor=south east, opacity=0.055] at ([xshift=-0.6cm,yshift=0.4cm]current page.south east)
+    {\fontsize{120}{120}\bfseries\textcolor{azulNorris}{$P$}};
+    \node[anchor=north east, opacity=0.08] at ([xshift=-0.65cm,yshift=-0.55cm]current page.north east)
+    {\fontsize{42}{42}\bfseries\textcolor{white}{Markov}};
+
+    % Encabezado institucional
+    \node[anchor=north, align=center, text=white] at ([yshift=-0.70cm]current page.north)
+    {\fontsize{16}{18}\selectfont\bfseries Universidad Nacional Autónoma de México\\[3pt]
+     \fontsize{14}{16}\selectfont\bfseries Facultad de Estudios Superiores Acatlán\\[2pt]
+     \fontsize{11}{13}\selectfont Matemáticas Aplicadas y Computación};
+
+    % Líneas decorativas inferiores
+    \foreach \r in {0.0,0.18,0.36}{
+        \fill[azulNorris, opacity=0.10] ([xshift=1.65cm,yshift=1.0cm+\r cm]current page.south west)
+        rectangle ([xshift=-1.0cm,yshift=1.06cm+\r cm]current page.south east);
+    }
+\end{tikzpicture}
+
+\vspace*{3.05cm}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.86]
+    % Emblema vectorial institucional estilizado para portada
+    \fill[white] (0,0) circle (2.36);
+    \fill[azulClaro] (0,0) circle (2.18);
+    \fill[white] (0,0) circle (1.93);
+    \draw[azulNorris, line width=1.1pt] (0,0) circle (2.18);
+    \draw[oro, line width=0.7pt] (0,0) circle (1.93);
+    \node[font=\bfseries\footnotesize, text=azulNorris] at (0,1.66) {UNAM};
+    \node[font=\bfseries\fontsize{20}{20}\selectfont, text=azulNorris] at (0,0.65) {UNAM};
+    \node[font=\bfseries\fontsize{8}{8}\selectfont, text=oro] at (0,0.18) {FES ACATLÁN};
+    \filldraw[fill=azulClaro, draw=azulNorris, line width=0.9pt]
+        (-0.82,-0.12)--(0.82,-0.12)--(0.64,-0.92)--(0,-1.30)--(-0.64,-0.92)--cycle;
+    \node[font=\tiny, align=center, text=azulNorris] at (0,-0.63) {Cadenas\\de Markov};
+    \filldraw[draw=azulNorris, fill=azulNorris!8, line width=0.8pt]
+        (-1.46,0.18).. controls (-2.05,0.46) and (-2.00,1.02) .. (-1.25,1.22)
+        .. controls (-1.42,0.84) and (-1.18,0.49) .. (-0.72,0.35)
+        .. controls (-1.00,0.22) and (-1.22,0.18) .. (-1.46,0.18);
+    \filldraw[draw=azulNorris, fill=azulNorris!8, line width=0.8pt]
+        (1.46,0.18).. controls (2.05,0.46) and (2.00,1.02) .. (1.25,1.22)
+        .. controls (1.42,0.84) and (1.18,0.49) .. (0.72,0.35)
+        .. controls (1.00,0.22) and (1.22,0.18) .. (1.46,0.18);
+    \filldraw[draw=azulNorris, fill=azulClaro, line width=0.7pt]
+        (-1.12,-1.28).. controls (-0.68,-1.55) and (0.68,-1.55) .. (1.12,-1.28);
+    \node[font=\tiny, text=azulNorris] at (0,-1.68) {POR MI RAZA HABLARÁ EL ESPÍRITU};
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+    \textcolor{azulNorris}{\rule{0.72\textwidth}{0.7pt}}\\[0.55cm]
+    {\fontsize{27}{31}\bfseries\textcolor{azulNorris}{Ejercicios resueltos de Norris}}\\[0.25cm]
+    {\fontsize{17}{20}\bfseries\textcolor{grisTexto}{Serpientes y escaleras y el mono infinito}}\\[0.38cm]
+    {\fontsize{12}{14}\textcolor{grisTexto}{Cadenas de Markov, tiempos de absorción y tiempos de espera}}\\[0.50cm]
+    \textcolor{oro}{\rule{0.42\textwidth}{1.1pt}}
+\end{center}
+
+\vspace{0.65cm}
+
+\begin{center}
+\begin{tikzpicture}
+    \node[draw=azulNorris, fill=grisSuave, rounded corners=9pt, line width=0.8pt,
+    inner xsep=16pt, inner ysep=12pt, text width=0.74\textwidth] {
+    \normalsize
+    \textbf{\textcolor{azulNorris}{Objetivo del trabajo.}}
+    Presentar una solución formal, clara y completa de dos ejercicios clásicos de probabilidad: el análisis de un tablero reducido de serpientes y escaleras mediante cadenas de Markov, y la estimación del tiempo esperado para que un mono infinito escriba una obra fija como las obras de Shakespeare.
+    };
+\end{tikzpicture}
+\end{center}
+
+\vfill
+
+\begin{flushright}
+\renewcommand{\baselinestretch}{1.13}
+\begin{tabular}{rl}
+\textbf{\textcolor{azulNorris}{Alumno:}} & Romero Velazquez Luis Fernando \\[1mm]
+\textbf{\textcolor{azulNorris}{Profesor:}} & Julio César Galindo López \\[1mm]
+\textbf{\textcolor{azulNorris}{Asignatura:}} & Procesos Estocásticos / Cadenas de Markov \\[1mm]
+\textbf{\textcolor{azulNorris}{Fecha:}} & \today
+\end{tabular}
+\end{flushright}
+
+\vspace{0.45cm}
+\begin{center}
+{\footnotesize\textit{Documento elaborado en \LaTeX{} con estructura formal, notación matemática y procedimientos detallados.}}
+\end{center}
+\end{titlepage}
+
+\pagenumbering{roman}
+\tableofcontents
+\newpage
+\pagenumbering{arabic}
+
+% ============================================================
+\section{Introducción}
+
+Este documento resuelve dos problemas de probabilidad asociados al enfoque de cadenas de Markov presentado por Norris. El primer problema estudia una versión reducida de \textit{serpientes y escaleras}; el segundo analiza el tiempo esperado en el experimento del \textit{mono infinito} escribiendo una obra fija, como las obras completas de Shakespeare.
+
+La importancia de estos ejercicios está en que ambos muestran una misma idea central: un proceso aleatorio puede estudiarse formalmente si se identifican sus estados, sus transiciones y el evento de llegada. En el juego de serpientes y escaleras se obtiene un sistema lineal de tiempos de absorción. En el problema del mono infinito se obtiene un tiempo de espera de crecimiento exponencial.
+
+\begin{cajaResumen}
+Los resultados principales obtenidos son:
+\begin{itemize}[leftmargin=1.1cm]
+    \item En el tablero de serpientes y escaleras, comenzando desde la casilla inicial, el tiempo esperado para terminar el juego es
+    \[
+        \boxed{\E_1(T)=7\text{ turnos}.}
+    \]
+    \item Si el jugador ya se encuentra en la casilla central, la probabilidad de terminar antes de regresar a la casilla 1 es
+    \[
+        \boxed{\Prob_5(T_9<T_1)=\frac{2}{7}.}
+    \]
+    \item Para un texto objetivo de longitud \(N\) sobre un alfabeto de \(a\) símbolos, el tiempo esperado de espera crece, en orden dominante, como
+    \[
+        \boxed{a^N}. 
+    \]
+\end{itemize}
+\end{cajaResumen}
+
+% ============================================================
+\section{Herramientas teóricas utilizadas}
+
+\subsection{Cadenas de Markov}
+
+Una cadena de Markov en tiempo discreto es una sucesión de variables aleatorias \((X_n)_{n\geq 0}\) con valores en un conjunto de estados \(S\), tal que
+\[
+\Prob(X_{n+1}=j\mid X_n=i,X_{n-1}=i_{n-1},\ldots,X_0=i_0)
+=
+\Prob(X_{n+1}=j\mid X_n=i).
+\]
+
+Esta propiedad significa que, para conocer la distribución del siguiente estado, basta conocer el estado actual. En el juego de serpientes y escaleras esto ocurre porque la siguiente posición depende únicamente de la casilla actual y del resultado del lanzamiento.
+
+\subsection{Análisis de primer paso}
+
+Si \(T\) es el tiempo de llegada a un estado absorbente y \(e_i=\E_i(T)\), entonces se puede escribir
+\[
+    e_i=1+\sum_j p_{ij}e_j,
+\]
+para cada estado no absorbente \(i\). El término \(1\) representa el turno que se acaba de jugar, y la suma pondera el tiempo esperado restante después del primer movimiento.
+
+\begin{cajaIdea}{Idea clave}
+El método de primer paso convierte un problema aleatorio en un sistema de ecuaciones lineales. Esa es la técnica principal que se usará en el primer ejercicio.
+\end{cajaIdea}
+
+\subsection{Matriz fundamental de una cadena absorbente}
+
+Cuando una cadena tiene estados transitorios y estados absorbentes, la matriz de transición puede escribirse en forma canónica como
+\[
+    P=\begin{pmatrix}
+        Q & R\\
+        0 & I
+    \end{pmatrix},
+\]
+donde \(Q\) describe las transiciones entre estados transitorios. La matriz fundamental es
+\[
+    F=(I-Q)^{-1}.
+\]
+
+La entrada \(F_{ij}\) representa el número esperado de visitas al estado transitorio \(j\) empezando desde el estado transitorio \(i\), antes de la absorción. Además, el vector de tiempos esperados de absorción es
+\[
+    \mathbf{e}=F\mathbf{1}.
+\]
+
+% ============================================================
+\section{Problema 1: serpientes y escaleras}
+
+\begin{problema}
+Se considera un tablero con nueve casillas. En cada turno se lanza una moneda justa. Si ocurre el primer resultado, el jugador avanza una casilla; si ocurre el segundo, avanza dos casillas. Después de avanzar, si cae en una casilla con serpiente o escalera, se mueve inmediatamente a la casilla indicada:
+\[
+    2\longrightarrow 7,\qquad
+    3\longrightarrow 5,\qquad
+    6\longrightarrow 1,\qquad
+    8\longrightarrow 4.
+\]
+La casilla \(9\) es la meta. Se pide calcular:
+\begin{enumerate}[label=\textbf{\alph*)},leftmargin=1.2cm]
+    \item El número esperado de turnos para terminar el juego comenzando en la casilla \(1\).
+    \item La probabilidad de terminar el juego, empezando desde la casilla central, sin regresar a la casilla \(1\).
+\end{enumerate}
+\end{problema}
+
+\subsection{Representación del tablero}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=1.18, every node/.style={font=\small}]
+    \foreach \x/\y/\n in {
+        0/0/1, 1/0/2, 2/0/3,
+        2/1/4, 1/1/5, 0/1/6,
+        0/2/7, 1/2/8, 2/2/9
+    }{
+        \draw[line width=0.8pt, rounded corners=2pt, fill=gray!7] (\x,\y) rectangle ++(1,1);
+        \node[font=\Large\bfseries] at (\x+0.5,\y+0.5) {\n};
+    }
+
+    \node[below=2pt] at (0.5,0) {inicio};
+    \node[above=2pt] at (2.5,3) {meta};
+
+    % Escaleras
+    \draw[-{Latex[length=3mm]}, very thick, azulNorris] (1.5,0.5) -- (0.5,2.5)
+        node[midway, right=3pt, fill=white, inner sep=1pt] {\scriptsize escalera};
+    \draw[-{Latex[length=3mm]}, very thick, azulNorris] (2.5,0.5) -- (1.5,1.5)
+        node[midway, right=3pt, fill=white, inner sep=1pt] {\scriptsize escalera};
+
+    % Serpientes
+    \draw[-{Latex[length=3mm]}, very thick, rojoNorris] (0.5,1.5) -- (0.5,0.5)
+        node[midway, left=3pt, fill=white, inner sep=1pt] {\scriptsize serpiente};
+    \draw[-{Latex[length=3mm]}, very thick, rojoNorris] (1.5,2.5) -- (2.5,1.5)
+        node[midway, right=3pt, fill=white, inner sep=1pt] {\scriptsize serpiente};
+\end{tikzpicture}
+\caption{Tablero de nueve casillas con dos escaleras y dos serpientes.}
+\end{figure}
+
+\subsection{Reducción de estados}
+
+Aunque el tablero tiene nueve casillas, no todas se conservan como estados efectivos después de aplicar las serpientes y escaleras. Las casillas \(2,3,6,8\) son casillas de paso inmediato:
+\[
+    2\mapsto 7,
+    \qquad
+    3\mapsto 5,
+    \qquad
+    6\mapsto 1,
+    \qquad
+    8\mapsto 4.
+\]
+
+Por tanto, una vez que se aplica la regla de serpiente o escalera, los estados que realmente pueden observarse al final de un turno son
+\[
+    S=\set{1,4,5,7,9}.
+\]
+El estado \(9\) es absorbente porque, al llegar a la meta, el juego termina.
+
+\begin{cajaIdea}{Interpretación}
+La reducción de estados evita escribir una matriz más grande de lo necesario. En vez de trabajar con las nueve casillas, se trabaja con los estados donde el jugador puede quedar al final de un turno.
+\end{cajaIdea}
+
+\subsection{Tabla de transiciones}
+
+Con moneda justa, desde cada estado transitorio hay dos movimientos posibles, cada uno con probabilidad \(1/2\). Después del avance se aplica, si corresponde, la serpiente o escalera.
+
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{C{1.5cm} C{2.5cm} C{2.5cm} L{5.4cm}}
+\toprule
+Estado actual & Avanza 1 & Avanza 2 & Transiciones efectivas \\
+\midrule
+\(1\) & \(2\mapsto 7\) & \(3\mapsto 5\) & \(1\to 7\) con \(1/2\), \(1\to 5\) con \(1/2\) \\
+\(4\) & \(5\) & \(6\mapsto 1\) & \(4\to 5\) con \(1/2\), \(4\to 1\) con \(1/2\) \\
+\(5\) & \(6\mapsto 1\) & \(7\) & \(5\to 1\) con \(1/2\), \(5\to 7\) con \(1/2\) \\
+\(7\) & \(8\mapsto 4\) & \(9\) & \(7\to 4\) con \(1/2\), \(7\to 9\) con \(1/2\) \\
+\(9\) & -- & -- & \(9\to 9\) con probabilidad \(1\) \\
+\bottomrule
+\end{tabular}
+\caption{Transiciones efectivas del juego.}
+\end{table}
+
+\subsection{Matriz de transición}
+
+Ordenando los estados como \((1,4,5,7,9)\), la matriz de transición es
+\[
+P=
+\begin{pmatrix}
+0 & 0 & \frac12 & \frac12 & 0\\
+\frac12 & 0 & \frac12 & 0 & 0\\
+\frac12 & 0 & 0 & \frac12 & 0\\
+0 & \frac12 & 0 & 0 & \frac12\\
+0 & 0 & 0 & 0 & 1
+\end{pmatrix}.
+\]
+
+La submatriz transitoria, correspondiente a los estados \((1,4,5,7)\), es
+\[
+Q=
+\begin{pmatrix}
+0 & 0 & \frac12 & \frac12\\
+\frac12 & 0 & \frac12 & 0\\
+\frac12 & 0 & 0 & \frac12\\
+0 & \frac12 & 0 & 0
+\end{pmatrix}.
+\]
+
+\subsection{Cálculo por ecuaciones de primer paso}
+
+Sea \(T_9\) el tiempo de llegada a la casilla \(9\), y sea
+\[
+    e_i=\E_i(T_9).
+\]
+Como \(9\) es absorbente,
+\[
+    e_9=0.
+\]
+Para los demás estados se plantea un sistema por análisis de primer paso:
+\[
+\begin{aligned}
+ e_1 &=1+\frac12e_7+\frac12e_5,\\
+ e_4 &=1+\frac12e_5+\frac12e_1,\\
+ e_5 &=1+\frac12e_1+\frac12e_7,\\
+ e_7 &=1+\frac12e_4+\frac12e_9.
+\end{aligned}
+\]
+Como \(e_9=0\), queda
+\[
+\begin{aligned}
+ e_1 &=1+\frac12e_7+\frac12e_5\quad\text{(1)}\\
+ e_4 &=1+\frac12e_5+\frac12e_1\quad\text{(2)}\\
+ e_5 &=1+\frac12e_1+\frac12e_7\quad\text{(3)}\\
+ e_7 &=1+\frac12e_4.\quad\text{(4)}
+\end{aligned}
+\]
+
+De (1) y (3) se observa que las expresiones de \(e_1\) y \(e_5\) son simétricas. En efecto,
+\[
+    e_1=1+\frac12e_7+\frac12e_5,
+    \qquad
+    e_5=1+\frac12e_1+\frac12e_7.
+\]
+Restando ambas ecuaciones,
+\[
+    e_1-e_5=\frac12(e_5-e_1),
+\]
+por lo que
+\[
+    \frac32(e_1-e_5)=0
+    \quad\Longrightarrow\quad
+    e_1=e_5.
+\]
+Sustituyendo \(e_5=e_1\) en (1),
+\[
+    e_1=1+\frac12e_7+\frac12e_1,
+\]
+por lo tanto
+\[
+    \frac12e_1=1+\frac12e_7
+    \quad\Longrightarrow\quad
+    e_1=2+e_7.\quad\text{(5)}
+\]
+
+Además, de (2), usando \(e_5=e_1\),
+\[
+    e_4=1+\frac12e_1+\frac12e_1=1+e_1.\quad\text{(6)}
+\]
+Y de (4),
+\[
+    e_7=1+\frac12e_4.\quad\text{(7)}
+\]
+Sustituyendo (6) en (7),
+\[
+    e_7=1+\frac12(1+e_1)=\frac32+\frac12e_1.\quad\text{(8)}
+\]
+Ahora sustituimos (8) en (5):
+\[
+    e_1=2+\frac32+\frac12e_1
+    =\frac72+\frac12e_1.
+\]
+Entonces,
+\[
+    \frac12e_1=\frac72
+    \quad\Longrightarrow\quad
+    e_1=7.
+\]
+Finalmente,
+\[
+    e_5=7,
+    \qquad
+    e_4=1+e_1=8,
+    \qquad
+    e_7=e_1-2=5.
+\]
+
+\begin{cajaResultado}{Resultado del inciso a)}
+El número esperado de turnos para terminar el juego empezando en la casilla \(1\) es
+\[
+    \boxed{\E_1(T_9)=7.}
+\]
+\end{cajaResultado}
+
+\subsection{Verificación con matriz fundamental}
+
+Para confirmar el resultado, se usa la matriz fundamental
+\[
+    F=(I-Q)^{-1}.
+\]
+En este caso,
+\[
+F=
+\begin{pmatrix}
+\frac73 & 1 & \frac53 & 2\\
+2 & 2 & 2 & 2\\
+\frac53 & 1 & \frac73 & 2\\
+1 & 1 & 1 & 2
+\end{pmatrix}.
+\]
+Multiplicando por el vector de unos,
+\[
+    \mathbf{e}=F\mathbf{1}
+    =
+\begin{pmatrix}
+\frac73 & 1 & \frac53 & 2\\
+2 & 2 & 2 & 2\\
+\frac53 & 1 & \frac73 & 2\\
+1 & 1 & 1 & 2
+\end{pmatrix}
+\begin{pmatrix}
+1\\1\\1\\1
+\end{pmatrix}
+= 
+\begin{pmatrix}
+7\\8\\7\\5
+\end{pmatrix}.
+\]
+Esto coincide con el cálculo por primer paso.
+
+\subsection{Diagrama de la cadena reducida}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    node distance=2.8cm,
+    estado/.style={circle, draw=azulNorris, fill=azulClaro, line width=0.8pt, minimum size=1cm, font=\bfseries},
+    meta/.style={circle, draw=verdeNorris, fill=verdeClaro, line width=0.9pt, minimum size=1cm, font=\bfseries},
+    flecha/.style={-{Latex[length=3mm]}, thick}
+]
+    \node[estado] (s1) {1};
+    \node[estado, right=of s1] (s5) {5};
+    \node[estado, above=of s5] (s7) {7};
+    \node[estado, below=of s5] (s4) {4};
+    \node[meta, right=of s7] (s9) {9};
+
+    \draw[flecha] (s1) -- node[above] {\(1/2\)} (s5);
+    \draw[flecha] (s1) to[bend left=20] node[above left] {\(1/2\)} (s7);
+    \draw[flecha] (s5) to[bend left=10] node[below] {\(1/2\)} (s1);
+    \draw[flecha] (s5) -- node[right] {\(1/2\)} (s7);
+    \draw[flecha] (s4) -- node[right] {\(1/2\)} (s5);
+    \draw[flecha] (s4) to[bend right=20] node[below left] {\(1/2\)} (s1);
+    \draw[flecha] (s7) -- node[above] {\(1/2\)} (s9);
+    \draw[flecha] (s7) to[bend left=18] node[left] {\(1/2\)} (s4);
+    \draw[flecha, verdeNorris] (s9) edge[loop right] node {1} (s9);
+\end{tikzpicture}
+\caption{Cadena de Markov reducida después de aplicar serpientes y escaleras.}
+\end{figure}
+
+\subsection{Probabilidad de terminar antes de regresar a la casilla 1}
+
+La casilla central del tablero es la casilla \(5\). Se desea calcular la probabilidad de llegar a la meta antes de regresar a la casilla \(1\), empezando desde \(5\). Definimos
+\[
+    p_i=\Prob_i(T_9<T_1),
+\]
+donde \(T_9\) es el tiempo de llegada a \(9\) y \(T_1\) es el tiempo de llegada a \(1\).
+
+Las condiciones de frontera son
+\[
+    p_9=1,
+    \qquad
+    p_1=0.
+\]
+Para los estados relevantes \(5,7,4\) se tiene:
+\[
+\begin{aligned}
+    p_5&=\frac12p_1+\frac12p_7,\\
+    p_7&=\frac12p_4+\frac12p_9,\\
+    p_4&=\frac12p_5+\frac12p_1.
+\end{aligned}
+\]
+Usando \(p_1=0\) y \(p_9=1\):
+\[
+\begin{aligned}
+    p_5&=\frac12p_7\quad\text{(9)}\\
+    p_7&=\frac12p_4+\frac12\quad\text{(10)}\\
+    p_4&=\frac12p_5.\quad\text{(11)}
+\end{aligned}
+\]
+Sustituyendo (11) en (10),
+\[
+    p_7=\frac12\left(\frac12p_5\right)+\frac12
+    =\frac14p_5+\frac12.
+\]
+Ahora se sustituye en (9):
+\[
+    p_5=\frac12\left(\frac14p_5+\frac12\right)
+    =\frac18p_5+\frac14.
+\]
+Por tanto,
+\[
+    p_5-\frac18p_5=\frac14,
+    \qquad
+    \frac78p_5=\frac14,\qquad
+    p_5=\frac14\cdot\frac87=\frac27.
+\]
+
+\begin{cajaResultado}{Resultado del inciso b)}
+La probabilidad de que el jugador, comenzando en la casilla central, termine el juego antes de regresar a la casilla \(1\) es
+\[
+    \boxed{\Prob_5(T_9<T_1)=\frac27.}
+\]
+\end{cajaResultado}
+
+\begin{cajaIdea}{Lectura intuitiva del resultado}
+El valor \(2/7\) no es grande porque desde la casilla \(5\) existe una probabilidad inmediata de \(1/2\) de caer en \(6\), que manda al jugador a \(1\). Incluso si evita ese regreso, todavía puede caer en la serpiente de \(8\) a \(4\), desde donde vuelve a existir riesgo de caer en \(1\).
+\end{cajaIdea}
+
+% ============================================================
+\section{Problema 2: el mono infinito y las obras de Shakespeare}
+
+\begin{problema}
+Un mono presiona teclas al azar. En cada pulsación elige, de manera independiente y uniforme, uno de \(a\) símbolos posibles. Se desea estimar el tiempo esperado para que escriba exactamente un texto fijo, por ejemplo la concatenación de todas las obras de Shakespeare.
+\end{problema}
+
+\subsection{Definición del texto objetivo}
+
+Sea
+\[
+    W=w_1w_2\cdots w_N
+\]
+el texto objetivo, donde \(N\) es el número total de caracteres. El alfabeto tiene \(a\) símbolos posibles. Por ejemplo, dependiendo de la codificación elegida, el alfabeto podría incluir solo letras, o también espacios, mayúsculas, signos de puntuación y saltos de línea.
+
+La probabilidad de que una secuencia específica de \(N\) pulsaciones coincida exactamente con \(W\) es
+\[
+    \Prob(\text{coincidir con }W)=\left(\frac1a\right)^N=\frac{1}{a^N}.
+\]
+
+\subsection{Modelo simplificado: bloques independientes}
+
+Primero se divide lo escrito en bloques consecutivos de longitud \(N\). Cada bloque es un intento independiente de producir exactamente \(W\). Si
+\[
+    p=\frac1{a^N},
+\]
+entonces el número de bloques necesarios hasta el primer éxito tiene distribución geométrica con parámetro \(p\):
+\[
+    \Prob(B=k)=(1-p)^{k-1}p,
+    \qquad k=1,2,3,\ldots
+\]
+La esperanza de una variable geométrica con parámetro \(p\) es
+\[
+    \E(B)=\frac1p=a^N.
+\]
+Como cada bloque contiene \(N\) caracteres, el número esperado de pulsaciones es
+\[
+    \E(T_{\text{bloques}})=N\,a^N.
+\]
+Si el mono escribe a velocidad constante de \(v\) pulsaciones por segundo, entonces el tiempo esperado en segundos es
+\[
+    \frac{N a^N}{v}.
+\]
+En años, usando \(365\) días por año,
+\[
+    \boxed{
+    \E(T_{\text{años}})=
+    \frac{N a^N}{v\cdot 60\cdot 60\cdot 24\cdot 365}
+    }.
+\]
+
+\begin{cajaResultado}{Resultado bajo bloques independientes}
+En el modelo de bloques no traslapados, el tiempo esperado para escribir exactamente un texto de longitud \(N\) sobre un alfabeto de \(a\) símbolos es
+\[
+    \boxed{N a^N\text{ pulsaciones}.}
+\]
+\end{cajaResultado}
+
+\subsection{Modelo más fino: ventana deslizante}
+
+El modelo anterior es claro, pero no aprovecha que el texto podría aparecer empezando en cualquier posición. Una formulación más precisa usa una ventana deslizante: después de cada nueva tecla se revisan los últimos \(N\) símbolos.
+
+En este modelo, el tiempo esperado exacto depende de los solapamientos internos del texto. Estos solapamientos se describen mediante los bordes del patrón.
+
+\begin{cajaIdea}{Bordes de un texto}
+Un entero \(r\in\set{1,2,\ldots,N}\) es un borde de \(W\) si los primeros \(r\) caracteres de \(W\) coinciden con los últimos \(r\) caracteres de \(W\). Es decir,
+\[
+    w_1w_2\cdots w_r=w_{N-r+1}w_{N-r+2}\cdots w_N.
+\]
+Siempre se incluye \(r=N\), porque todo texto coincide consigo mismo.
+\end{cajaIdea}
+
+Si \(B(W)\) es el conjunto de bordes de \(W\), entonces el tiempo esperado de aparición de \(W\), contado en pulsaciones, es
+\[
+    \E(T_W)=\sum_{r\in B(W)}a^r.
+\]
+El término dominante siempre es \(a^N\), porque \(N\in B(W)\). Por ello,
+\[
+    \E(T_W)\approx a^N
+\]
+cuando no hay solapamientos relevantes.
+
+\subsection{Comparación entre los dos modelos}
+
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{L{4.2cm} L{5.5cm} L{4.2cm}}
+\toprule
+Modelo & Idea & Tiempo esperado aproximado \\
+\midrule
+Bloques independientes & Se revisan bloques separados de tamaño \(N\). & \(N a^N\) pulsaciones \\
+Ventana deslizante & Se revisa cada posible posición inicial del texto. & Del orden de \(a^N\) pulsaciones \\
+\bottomrule
+\end{tabular}
+\caption{Comparación entre los dos modelos para el problema del mono infinito.}
+\end{table}
+
+La diferencia de un factor \(N\) es pequeña en comparación con el tamaño de \(a^N\). Para textos enormes, el crecimiento exponencial domina por completo.
+
+\subsection{Escala del resultado}
+
+Para comprender la magnitud, conviene trabajar con logaritmos. En el modelo de bloques, si el tiempo esperado en años es
+\[
+    Y=\frac{N a^N}{v\cdot 31536000},
+\]
+entonces
+\[
+    \log_{10}Y
+    =\log_{10}N+N\log_{10}a-\log_{10}v-\log_{10}(31536000).
+\]
+
+Esto permite expresar tiempos imposibles de escribir en notación decimal ordinaria. Por ejemplo, si se tomara solo como referencia
+\[
+    N=1{,}000{,}000,
+    \qquad
+    a=50,
+    \qquad
+    v=10\text{ teclas/segundo},
+\]
+entonces
+\[
+    \log_{10}Y\approx 1{,}698{,}967.5.
+\]
+Es decir, el tiempo esperado sería aproximadamente
+\[
+    10^{1{,}698{,}967.5}\text{ años}.
+\]
+Este número no es simplemente grande: es absolutamente inobservable en cualquier escala física razonable.
+
+\begin{cajaAlerta}{Punto conceptual importante}
+El teorema del mono infinito afirma que un texto finito aparecerá con probabilidad \(1\) si el proceso aleatorio continúa indefinidamente. Sin embargo, eso no implica que el evento sea observable en un tiempo razonable. Probabilidad uno en tiempo infinito no significa rapidez, ni factibilidad práctica.
+\end{cajaAlerta}
+
+\subsection{Interpretación para Shakespeare}
+
+Si \(W\) representa todas las obras de Shakespeare, entonces \(N\) es muy grande. Además, una codificación realista necesita un alfabeto con letras, espacios, puntuación, mayúsculas y saltos de línea. Por tanto, \(a\) también puede ser considerablemente mayor que \(26\).
+
+El resultado general es que el tiempo esperado queda determinado por una expresión exponencial:
+\[
+    \boxed{\text{tiempo esperado}\sim a^N.}
+\]
+En consecuencia, aunque el evento sea teóricamente posible en una secuencia infinita, su tiempo esperado supera de manera abrumadora cualquier horizonte temporal práctico.
+
+% ============================================================
+\section{Conclusiones generales}
+
+El ejercicio de serpientes y escaleras muestra cómo una situación lúdica puede transformarse en un problema formal de cadenas de Markov. La reducción a estados efectivos permitió construir una matriz de transición pequeña, resolver un sistema lineal y verificar el resultado mediante la matriz fundamental. El resultado principal fue
+\[
+    \boxed{\E_1(T_9)=7\text{ turnos}.}
+\]
+Además, al analizar la probabilidad de llegar a la meta antes de regresar a la casilla inicial, se obtuvo
+\[
+    \boxed{\Prob_5(T_9<T_1)=\frac27.}
+\]
+
+El problema del mono infinito, por otro lado, muestra el poder y las limitaciones de los argumentos asintóticos. Un evento puede ocurrir con probabilidad uno en una secuencia infinita, pero aun así tener un tiempo esperado tan grande que resulte imposible de observar. Para un texto de longitud \(N\) sobre un alfabeto de \(a\) símbolos, el tiempo esperado crece esencialmente como
+\[
+    \boxed{a^N}.
+\]
+
+La enseñanza común de ambos ejercicios es que la probabilidad no solo estudia si un evento puede ocurrir, sino también cuánto tiempo se espera para observarlo y qué estructura matemática gobierna ese tiempo de espera.
+
+% ============================================================
+\section*{Referencias}
+\addcontentsline{toc}{section}{Referencias}
+
+\begin{enumerate}[leftmargin=1.1cm]
+    \item Norris, J. R. \textit{Markov Chains}. Cambridge University Press.
+    \item Weber, R. \textit{Markov Chains: Example Sheet 1}. University of Cambridge.
+    \item Feller, W. \textit{An Introduction to Probability Theory and Its Applications}. Wiley.
+    \item Grimmett, G. y Stirzaker, D. \textit{Probability and Random Processes}. Oxford University Press.
+\end{enumerate}
+
+\end{document}
+
