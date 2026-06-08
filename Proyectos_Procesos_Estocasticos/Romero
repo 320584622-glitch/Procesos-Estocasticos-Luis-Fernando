@@ -1,27 +1,127 @@
+```text
 Proyectos_Procesos_Estocasticos/
 │
 ├── 01_Markov_Discreto_Continuo/
 │   ├── markov_discreto_continuo.tex
+│   ├── markov_discreto_continuo.pdf
 │   └── README.md
 │
 ├── 02_Ejercicios_Procesos_Estocasticos/
 │   ├── ejercicios_procesos_estocasticos_60.tex
+│   ├── ejercicios_procesos_estocasticos_60.pdf
 │   └── README.md
 │
 ├── 03_Markov_Aplicado_Serpientes_Mono_Infinito/
 │   ├── markov_serpientes_mono_infinito.tex
+│   ├── markov_serpientes_mono_infinito.pdf
 │   └── README.md
 │
 ├── 04_Plantillas_Ejercicios_Basicos/
 │   ├── plantilla_markov_poisson_browniano.tex
+│   ├── plantilla_markov_poisson_browniano.pdf
 │   └── README.md
 │
 ├── 05_Historia_Probabilidad_Yuval_Peres/
-│   ├── historia_probabilidad_yuval_peres.pdf
 │   ├── historia_probabilidad_yuval_peres.tex
+│   ├── historia_probabilidad_yuval_peres.pdf
 │   └── README.md
 │
-└── 06_Axiomas_Geometria_Conformal_Yuval_Peres/
-    ├── axiomas_geometria_conformal_yuval_peres.pdf
-    ├── axiomas_geometria_conformal_yuval_peres.tex
-    └── README.md
+├── 06_Axiomas_Geometria_Conformal_Yuval_Peres/
+│   ├── axiomas_geometria_conformal_yuval_peres.tex
+│   ├── axiomas_geometria_conformal_yuval_peres.pdf
+│   └── README.md
+│
+├── 07_Caminata_Aleatoria_Avanzada/
+│   ├── caminata_aleatoria_avanzada.ipynb
+│   ├── caminata_aleatoria_avanzada.py
+│   ├── README.md
+│   └── graficas/
+│       ├── caminata_1d.png
+│       ├── caminata_2d.png
+│       ├── histograma_posiciones.png
+│       └── convergencia_normal.png
+│
+├── 08_Proceso_Poisson_Llegadas/
+│   ├── proceso_poisson_llegadas.tex
+│   ├── proceso_poisson_llegadas.pdf
+│   ├── simulacion_poisson.ipynb
+│   ├── simulacion_poisson.py
+│   ├── README.md
+│   └── graficas/
+│       ├── conteo_eventos.png
+│       ├── tiempos_entre_llegadas.png
+│       └── comparacion_poisson_teorica.png
+│
+├── 09_Movimiento_Browniano_Simulacion/
+│   ├── movimiento_browniano_simulacion.tex
+│   ├── movimiento_browniano_simulacion.pdf
+│   ├── simulacion_browniano.ipynb
+│   ├── simulacion_browniano.py
+│   ├── README.md
+│   └── graficas/
+│       ├── trayectoria_browniana.png
+│       ├── multiples_trayectorias.png
+│       └── incrementos_normales.png
+│
+├── 10_Martingalas_Juego_Justo/
+│   ├── martingalas_juego_justo.tex
+│   ├── martingalas_juego_justo.pdf
+│   ├── simulacion_martingalas.ipynb
+│   ├── simulacion_martingalas.py
+│   ├── README.md
+│   └── graficas/
+│       ├── capital_juego_justo.png
+│       ├── ruina_jugador.png
+│       └── estrategia_doblar_apuesta.png
+│
+├── 11_Markov_Aplicado_Clima/
+│   ├── markov_aplicado_clima.tex
+│   ├── markov_aplicado_clima.pdf
+│   ├── simulacion_markov_clima.ipynb
+│   ├── simulacion_markov_clima.py
+│   ├── README.md
+│   └── graficas/
+│       ├── evolucion_probabilidades.png
+│       ├── distribucion_estacionaria.png
+│       └── simulacion_estados_clima.png
+│
+├── 12_Percolacion_Red_Cuadrada/
+│   ├── percolacion_red_cuadrada.tex
+│   ├── percolacion_red_cuadrada.pdf
+│   ├── simulacion_percolacion.ipynb
+│   ├── simulacion_percolacion.py
+│   ├── README.md
+│   └── graficas/
+│       ├── red_percolacion.png
+│       ├── probabilidad_cruce.png
+│       └── transicion_critica.png
+│
+├── 13_Black_Scholes_Monte_Carlo/
+│   ├── investigacion_black_scholes.tex
+│   ├── investigacion_black_scholes.pdf
+│   ├── presentacion_black_scholes.tex
+│   ├── presentacion_black_scholes.pdf
+│   ├── simulacion_black_scholes.py
+│   ├── simulacion_black_scholes.ipynb
+│   ├── README.md
+│   └── graficas/
+│       ├── trayectorias_monte_carlo.png
+│       ├── distribucion_precios_finales.png
+│       ├── probabilidad_ganancia.png
+│       └── valor_opcion_call.png
+│
+└── 14_SLE_Percolacion_Invariancia_Conformal/
+    ├── investigacion_sle_percolacion.tex
+    ├── investigacion_sle_percolacion.pdf
+    ├── presentacion_sle_percolacion.tex
+    ├── presentacion_sle_percolacion_20_mayo.pdf
+    ├── simulacion_percolacion_sle.py
+    ├── simulacion_percolacion_sle.ipynb
+    ├── README.md
+    └── graficas/
+        ├── percolacion_critica.png
+        ├── frontera_aleatoria.png
+        ├── curva_sle_aproximada.png
+        └── invarianza_conformal.png
+```
+
